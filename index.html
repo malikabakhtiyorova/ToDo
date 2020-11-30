@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+</head>
+
+<body class="bg-light">
+
+  <h1 class="sr-only">Write your ToDos</h1>
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="task-heading h1 text-center text-danger">todos</h2>
+
+      <div class="border w-50 mx-auto rounded overflow-hidden shadow">
+        <form class="p-2 js-task-form" action="https://echo.htmlacademy.ru" method="POST">
+          <input class="form-control border-0 rounded-0 shadow-none js-task-input" type="text"
+            placeholder="What needs to be done?" aria-label="Write your task" name="task" autocomplete="off">
+        </form>
+
+        <main>
+          <ul class="list-group js-tasks-list"></ul>
+        </main>
+
+        <footer class="footer px-3 py-2 d-none  align-items-center justify-content-between">
+          <span>
+            <span class="js-remained-tasks">3</span>
+            items left
+          </span>
+          <div class="add-btns d-flex">
+
+            <div class="d-flex align-items-center">
+              <button class="js-tasks__filter-all btn-active btn py-1 mx-1 shadow-none js-show-all-button" type="button"
+                active>All</button>
+              <button class="js-tasks__filter-active btn-active btn shadow-none py-1 mx-1 js-show-active-button"
+                type="button">Active</button>
+              <button class="js-tasks__filter-completed btn-active btn py-1 shadow-none mx-1 js-show-completed-button"
+                type="button">Completed</button>
+            </div>
+
+
+            <button class="tasks__clear-completed btn btn-link text-dark shadow-none js-clear-completed-btn"
+              type="button">Clear
+              completed</button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+  <template id="task-template">
+    <li
+      class="tasks-li task-list-item list-group-item border-left-0 border-right-0 rounded-0 d-flex align-items-center justify-content-between js-task-list-item">
+
+      <!-- <div class="task-item-wrapper d-flex align-items-center">
+        <div class="custom-control custom-checkbox">
+          <input class="js-todo__checkbox custom-control-input js-is-completed-checkbox" type="checkbox"
+            id="customCheck1">
+          <label class="todo__label custom-control-label" for="customCheck1"></label>
+        </div> -->
+      <input class="js-todo__checkbox js-is-completed-checkbox" type="checkbox">
+
+      <span class="js-task-content js-todo">default</span>
+      </div>
+
+      <button class="remove-button btn text-danger shadow-none py-0  js-remove-task-btn" type="button">&Cross;</button>
+
+    </li>
+  </template>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+  <!-- <script src="js/main.js"></script> -->
+  <script src="js/new.js"></script>
+  <!-- <script src="me.js"></script> -->
+</body>
+
+</html>
