@@ -55,11 +55,13 @@
     <li
       class="tasks-li task-list-item list-group-item border-left-0 border-right-0 rounded-0 d-flex align-items-center justify-content-between js-task-list-item">
       <div class="d-flex align-items-center">
-        <input class="js-todo__checkbox js-is-completed-checkbox mr-2" type="checkbox">
+        <input class="js-is-completed-checkbox mr-2" type="checkbox" name="todo-completed-checkbox" data-todo-id=""
+          aria-label="Check for completed task">
         <span class="js-task-content ml-2">default</span>
       </div>
 
-      <button class="remove-button btn text-danger shadow-none py-0  js-remove-task-btn" type="button">&Cross;</button>
+      <button class="remove-button btn text-danger shadow-none py-0  js-remove-task-btn" type="button"
+        data-todo-id="">&Cross;</button>
     </li>
   </template>
 

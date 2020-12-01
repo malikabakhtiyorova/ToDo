@@ -28,6 +28,9 @@ var createTodoElement = function (todo) {
   var newTodoElement = elTodoTamplate.cloneNode(true);
 
   $_('.js-task-content', newTodoElement).textContent = todo.task;
+  $_('.js-is-completed-checkbox', newTodoElement).dataset.todoId = todo.id;
+  $_('.js-is-completed-checkbox', newTodoElement).checked = todo.completed;
+  $_('.js-remove-task-btn', newTodoElement).dataset.todoId = todo.id;
 
   return newTodoElement;
 }
@@ -92,6 +95,11 @@ var onFormSubmit = function (evt) {
 // ===============================
 
 elTodoForm.addEventListener('submit', onFormSubmit);
+
+elTodoList.addEventListener('click', function (evt) {
+  console.log(evt.target);
+});
+
 
 //Show all todos by taking from localStorage
 renderTodos();
