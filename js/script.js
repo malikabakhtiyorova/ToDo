@@ -1,13 +1,18 @@
 // Take todos array and todosId from local storage
 var todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-var todoId = Number(localStorage.getItem('todoId'));
+var todoId = Number(localStorage.getItem('todoCounter'));
 
 //Chosing elements
 var elTodoForm = $_('.js-task-form');
 var elTodoInput = $_('.js-task-input', elTodoForm);
 var elTodoList = $_('.js-tasks-list');
 var elTodoTamplate = $_('#task-template').content;
+
+
+// ===================================
+//       FUNCTIONS
+// ===================================
 
 //Push todo to todos array function
 var pushTodo = function (todo) {
@@ -44,6 +49,16 @@ var clearTodoInputValue = function () {
   elTodoInput.value = '';
 }
 
+//Update local todos
+var updateLocalTodos = function () {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+//Update local todoId
+var updateLocalTodoId = function () {
+  localStorage.setItem('todoCounter', todoId);
+}
+
 // Listen to submit event of form function
 var onFormSubmit = function (evt) {
   evt.preventDefault();
@@ -65,6 +80,18 @@ var onFormSubmit = function (evt) {
 
   //Clear todo Input value after rendering todos
   clearTodoInputValue();
+
+  //Update local Todos and todoId
+  updateLocalTodos();
+  updateLocalTodoId();
 }
 
+
+// ===============================
+// LISTEN TO EVENTS
+// ===============================
+
 elTodoForm.addEventListener('submit', onFormSubmit);
+
+//Show all todos by taking from localStorage
+renderTodos();
