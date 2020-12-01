@@ -33,9 +33,10 @@ var renderTodos = function (todos) {
   elTodosFragment = document.createDocumentFragment();
 
   todos.forEach(function (todo) {
-    // elTodosFragment.appendchild(createTodoElement(todo));
-    console.log(createTodoElement(todo));
+    elTodosFragment.appendChild(createTodoElement(todo));
   });
+
+  elTodoList.appendChild(elTodosFragment);
 }
 
 // Listen to submit event of form function
