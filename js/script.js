@@ -28,7 +28,7 @@ var createTodoElement = function (todo) {
 }
 
 //RenderTodos function
-var renderTodos = function (todos) {
+var renderTodos = function () {
   elTodoList.innerHTML = '';
   elTodosFragment = document.createDocumentFragment();
 
@@ -37,6 +37,11 @@ var renderTodos = function (todos) {
   });
 
   elTodoList.appendChild(elTodosFragment);
+}
+
+//Clear to do input value function
+var clearTodoInputValue = function () {
+  elTodoInput.value = '';
 }
 
 // Listen to submit event of form function
@@ -55,7 +60,11 @@ var onFormSubmit = function (evt) {
   //Push todo to todos array
   pushTodo(todoInputValue);
 
-  renderTodos(todos);
+  //Render todos
+  renderTodos();
+
+  //Clear todo Input value after rendering todos
+  clearTodoInputValue();
 }
 
 elTodoForm.addEventListener('submit', onFormSubmit);
