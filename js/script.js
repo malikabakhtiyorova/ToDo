@@ -7,14 +7,34 @@ var todoId = Number(localStorage.getItem('todoId'));
 var elTodoForm = $_('.js-task-form');
 var elTodoInput = $_('.js-task-input', elTodoForm);
 var elTodoList = $_('.js-tasks-list');
-var elTodoTamplate = $('#task-template').content;
+var elTodoTamplate = $_('#task-template').content;
 
 //Push todo to todos array function
 var pushTodo = function (todo) {
   todos.push({
-    todo: todo,
+    task: todo,
     completed: false,
     id: ++todoId
+  });
+}
+
+// Create todo Element
+var createTodoElement = function (todo) {
+  var newTodoElement = elTodoTamplate.cloneNode(true);
+
+  $_('.js-task-content', newTodoElement).textContent = todo.task;
+
+  return newTodoElement;
+}
+
+//RenderTodos function
+var renderTodos = function (todos) {
+  elTodoList.innerHTML = '';
+  elTodosFragment = document.createDocumentFragment();
+
+  todos.forEach(function (todo) {
+    // elTodosFragment.appendchild(createTodoElement(todo));
+    console.log(createTodoElement(todo));
   });
 }
 
@@ -34,7 +54,7 @@ var onFormSubmit = function (evt) {
   //Push todo to todos array
   pushTodo(todoInputValue);
 
-  renderTodos();
+  renderTodos(todos);
 }
 
 elTodoForm.addEventListener('submit', onFormSubmit);
