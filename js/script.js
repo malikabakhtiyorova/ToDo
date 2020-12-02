@@ -15,6 +15,13 @@ var elTodoTamplate = $_('#task-template').content;
 var elTodosFooter = $_('.js-todos-footer');
 var elRemainedTasks = $_('.js-remained-tasks', elTodosFooter);
 
+//Choosing filter buttons
+var elFilterButtonsWrapper = $_('.js-filter-buttons');
+var elShowAllTasksBtn = $_('.js-show-all-button', elFilterButtonsWrapper);
+var elShowActiveTasksBtn = $_('.js-show-active-button', elFilterButtonsWrapper);
+var elShowCompletedTasksBtn = $_('.js-show-completed-button', elFilterButtonsWrapper);
+var elClearCompletedBtn = $_('.js-clear-completed-btn', elFilterButtonsWrapper);
+
 
 // ===================================
 //       FUNCTIONS
@@ -65,7 +72,7 @@ var createTodoElement = function (todo) {
 }
 
 //RenderTodos function
-var renderTodos = function () {
+var renderTodos = function (todos) {
   elTodoList.innerHTML = '';
   elTodosFragment = document.createDocumentFragment();
 
@@ -113,7 +120,7 @@ var onFormSubmit = function (evt) {
   pushTodo(todoInputValue);
 
   //Render todos
-  renderTodos();
+  renderTodos(todos);
 
   //Clear todo Input value after rendering todos
   clearTodoInputValue();
@@ -162,7 +169,34 @@ elTodoList.addEventListener('click', function (evt) {
   }
 });
 
+// Filter tasks
+elShowAllTasksBtn.addEventListener('click', function () {
+  renderTodos(todos);
+});
+
+elShowCompletedTasksBtn.addEventListener('click', function () {
+  renderTodos(completedTasks);
+});
+
+elShowActiveTasksBtn.addEventListener('click', function () {
+  renderTodos(uncompletedTasks);
+});
+
+elClearCompletedBtn.addEventListener('click', function () {
+  completedTasks.forEach(function (completedTask) {
+    var todoIndex = todos.findIndex(function (todo) {
+      return todo.id === completedTask.id;
+    });
+
+    todos.splice(todoIndex, 1);
+  });
+
+  completedTasks = [];
+  renderTodos(completedTasks);
+  updateLocalTodos();
+});
+
 
 //Show all todos by taking from localStorage
-renderTodos();
+renderTodos(todos);
 updateLeftTasksNumber();
