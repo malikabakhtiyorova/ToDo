@@ -8,6 +8,7 @@ var elTodoForm = $_('.js-task-form');
 var elTodoInput = $_('.js-task-input', elTodoForm);
 var elTodoList = $_('.js-tasks-list');
 var elTodoTamplate = $_('#task-template').content;
+var elTodosFooter = $_('.js-todos-footer');
 
 
 // ===================================
@@ -32,6 +33,10 @@ var createTodoElement = function (todo) {
   $_('.js-is-completed-checkbox', newTodoElement).checked = todo.completed;
   $_('.js-remove-task-btn', newTodoElement).dataset.todoId = todo.id;
 
+  if (todo.completed) {
+    $_('.js-task-list-item', newTodoElement).classList.add('completed-task');
+  }
+
   return newTodoElement;
 }
 
@@ -45,6 +50,11 @@ var renderTodos = function () {
   });
 
   elTodoList.appendChild(elTodosFragment);
+
+  if (todos.length !== 0) {
+    elTodosFooter.classList.remove('d-none');
+    elTodosFooter.classList.add('d-flex');
+  }
 }
 
 //Clear to do input value function
@@ -97,7 +107,31 @@ var onFormSubmit = function (evt) {
 elTodoForm.addEventListener('submit', onFormSubmit);
 
 elTodoList.addEventListener('click', function (evt) {
-  console.log(evt.target);
+  if (evt.target.matches('.js-remove-task-btn')) {
+    var removedTodoId = Number(evt.target.dataset.todoId);
+
+    var todoIndex = todos.findIndex(function (todo) {
+      return todo.id === removedTodoId;
+    });
+
+    evt.target.closest('.tasks-li').remove();
+    todos.splice(todoIndex, 1);
+    updateLocalTodos();
+  }
+
+  if (evt.target.matches('.js-is-completed-checkbox')) {
+    var completedTodoId = Number(evt.target.dataset.todoId);
+
+    var completedTodo = todos.find(function (todo) {
+      if (todo.id === completedTodoId) {
+        todo.completed = !todo.completed;
+      }
+    });
+
+    evt.target.closest('.js-task-list-item').classList.toggle('completed-task');
+
+    updateLocalTodos();
+  }
 });
 
 
