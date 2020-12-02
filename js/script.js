@@ -3,17 +3,41 @@ var todos = JSON.parse(localStorage.getItem('todos')) || [];
 
 var todoId = Number(localStorage.getItem('todoCounter'));
 
+//Completed and uncompleted tasks array
+var completedTasks = [];
+var uncompletedTasks = [];
+
 //Chosing elements
 var elTodoForm = $_('.js-task-form');
 var elTodoInput = $_('.js-task-input', elTodoForm);
 var elTodoList = $_('.js-tasks-list');
 var elTodoTamplate = $_('#task-template').content;
 var elTodosFooter = $_('.js-todos-footer');
+var elRemainedTasks = $_('.js-remained-tasks', elTodosFooter);
 
 
 // ===================================
 //       FUNCTIONS
 // ===================================
+
+var separateCompletedAndUncompleted = function () {
+  completedTasks = [];
+  uncompletedTasks = [];
+
+  todos.forEach(function (todo) {
+    if (todo.completed) {
+      completedTasks.push(todo);
+    } else {
+      uncompletedTasks.push(todo);
+    }
+  });
+}
+
+// Update left tasks number funtion
+var updateLeftTasksNumber = function () {
+  separateCompletedAndUncompleted();
+  elRemainedTasks.textContent = uncompletedTasks.length;
+}
 
 //Push todo to todos array function
 var pushTodo = function (todo) {
@@ -97,6 +121,8 @@ var onFormSubmit = function (evt) {
   //Update local Todos and todoId
   updateLocalTodos();
   updateLocalTodoId();
+
+  updateLeftTasksNumber();
 }
 
 
@@ -117,6 +143,7 @@ elTodoList.addEventListener('click', function (evt) {
     evt.target.closest('.tasks-li').remove();
     todos.splice(todoIndex, 1);
     updateLocalTodos();
+    updateLeftTasksNumber();
   }
 
   if (evt.target.matches('.js-is-completed-checkbox')) {
@@ -137,3 +164,4 @@ elTodoList.addEventListener('click', function (evt) {
 
 //Show all todos by taking from localStorage
 renderTodos();
+updateLeftTasksNumber();
