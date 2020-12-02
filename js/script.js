@@ -158,6 +158,7 @@ elTodoList.addEventListener('click', function (evt) {
     evt.target.closest('.js-task-list-item').classList.toggle('completed-task');
 
     updateLocalTodos();
+    updateLeftTasksNumber();
   }
 });
 
