@@ -20,6 +20,6 @@
   border: 1px solid #777;
 }
 
-.completed-task {
+.completed-task .task-content {
   text-decoration: line-through;
 }
